@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    margin: 0;
+}
+
+$very_dark_blue: hsl(243, 87%, 12%);
+$desaturated_blue: hsl(238, 22%, 44%);
+$bright_blue: hsl(224,93%,58%);
+$moderate-cyan: hsl(170, 45%, 43%);
+$light_grayish_blue: hsl(240, 75%, 98%);
+$light_gray: hsl(0, 0%, 75%);
+$open_sans: 'open-sans', sans-serif;
+$raleway: "Raleway", sans-serif;
+
+
+@mixin container ($max_width, $margin, $padding){
+    max-width: $max_width;
+    margin: $margin;
+    padding: $padding;
+}
+
+@mixin btn_a ($color ) {
+    color: $background;
+}
+
+@mixin grid ($display, $columns, $gap) {
+    display: $display;
+    grid-template-columns: $columns;
+    gap: $gap;
+}
+
+@mixin flex ($display, $direction, $justify, $align) {
+    display: $display;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@function calculate-rem($px) {
+    $base-font-size: 16px; 
+    @return ($px / $base-font-size) * 1rem;
+}
+
+%bnt-sub {
+    background-color: $bright_blue;
+    border-radius: 4px;
+    color: $light_grayish_blue;
+    padding: 9px 16px;
+    cursor: pointer;
+}
+
+h1, h2, a {
+    font-family: $open_sans;
+    font-size: calculate-rem(40px);
+    line-height: 1.5;
+}
+
+p, input[type="submit"]{
+    font-family: $raleway;
+    font-size: calculate-rem(16px);
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none; 
+    font-size: calculate-rem(16px);   
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.container {
+    @include container(1440px, auto, 0 10px)
+}
+
+header {
+    @include container(1440px, 10px auto, 0 10px );
+    @include flex (flex, row, space-between, center);
+    nav {
+        @include flex (flex, row, space-between, center);
+        ul {
+            @include flex (flex, row, space-between, center);
+            li {
+                @include flex (flex, row, space-between, center);
+                a {
+                    @include flex (flex, row, space-between, center);
+                    color: $very_dark_blue;
+                    padding: 15px 17px;
+                    text-decoration: none;
+                    &:hover {
+                        color: $moderate-cyan;
+                    }
+                }
+            }
+        }
+    }
+}
+
+footer {
+    background-color: $very_dark_blue;
+    color: $light_grayish_blue;
+    >div {
+        @include container(1440px, auto, 100px 15px);
+        @include grid( grid, 1fr 2fr 1fr, 50px);
+        justify-content: space-between;
+        >div {
+            @include grid(grid, 1fr, 10px);
+
+            li{
+                padding-bottom: 10px;
+            }
+        }
+    }
+
+    a {
+        color: $light_grayish_blue;
+
+        &:hover {
+            color: $moderate-cyan;
+        }
+    }
+    #grid {
+        @include grid(grid, repeat(2, 1fr), 50px);
+    }
+
+    #bord {
+        ul {
+        @include flex(flex, row, start, baseline);
+        gap: 30px;
+            a {
+                border: 1px solid $light_grayish_blue;
+                border-radius: 50%;
+                padding: 6px 8px;
+            }
+        }
+    }
+}
+
+main {
+    section#All_files {
+        @include container(1440px, auto, 50px 15px);
+        @include grid( grid, 1fr 1fr, 50px);
+        div {
+        @include flex(flex, column, center, start);
+        gap: 20px;
+            form {
+                input[type="mail"]{
+                    padding: 12px 8px;
+                    border-radius: 4px; 
+                    border:1px solid $very_dark_blue;
+                }
+                input[type="submit"]{
+                    @extend %bnt-sub;
+                    border: none;
+
+                    &:hover {
+                       background-color: $very_dark_blue; 
+                    }
+                }
+            }
+        }
+        div {
+            img {
+                width: 100%;
+                height: 503px;
+            }
+        }
+    }    
+}
+
+#productive {
+    margin-top: 180px;
+    position: relative;
+    background-color: #f6f6fe;
+    padding: 0 0 50px 0;
+
+    &::before {
+        content: "";
+        background-image: url(/img/bg-curve-desktop.svg);
+        position: absolute;
+        top: -126px;
+        width: 100%;
+        object-fit: cover;
+        background-size: cover;
+        height: 128px;
+    }
+
+    .container {
+        @include grid(grid, 1fr 1fr, 80px);
+        padding: 120px 15px;
+
+        > div {
+            padding: 10px 15px;
+            @include flex(flex, column, center, start);
+            gap: 20px;
+
+            a{
+                color: $moderate-cyan;
+                border-bottom: 1px solid $moderate-cyan;
+                margin-right: auto;
+
+                &:hover {
+                   opacity: 0.7;
+                }
+            }
+
+            article {
+                width: 70%;
+                background-color: #FFFF;
+                padding: 30px;
+                border-radius: 6px;
+                box-shadow: 0px 1px 14px #e1e1e1;
+                margin-top: 34px;
+
+                > div {
+                    @include grid(grid, 1fr 2fr 1fr, 0);
+                    align-items: center;
+                    padding-top: 10px;
+                    margin: 30px 0;
+                    img {
+                        height: 82px;
+                        border-radius: 50%;
+                        margin-right: auto;     
+                    }
+                }
+            }
+        }
+
+        > div#img2 {
+            padding: 10px;
+
+            > img {
+                width: 100%;
+                height: 512px;
+            }
+        }
+    }
+}
+
+#access {
+    background-color: $desaturated_blue;
+    > div {
+        @include container(1440px, auto, 100px 15px);
+        @include grid( grid, 1fr 1fr, 200px);
+        align-items: center;
+        color: #ffffff;
+    }
+    form {
+        @include grid(grid, 1fr, 24px);
+        input[type="mail"] {
+            padding: 12px 8px;
+            border-radius: 4px; 
+            border:1px solid $very_dark_blue;
+        }
+        input[type="submit"] {
+            @extend %bnt-sub;
+            border: none;
+            margin-right: auto;
+
+            &:hover {
+               background-color: $very_dark_blue; 
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    main {
+        section#All_files {
+            @include grid(grid, 1fr, 20px);
+        }
+
+        section#productive .container {
+            @include grid(grid, 1fr, 20px);
+        }
+
+        section#access div{
+            @include grid(grid, 1fr, 20px);
+        }
+    }
+
+    footer {
+        > div {
+            @include  grid (grid, 1fr, 80px);
+                div#grid {
+                    @include grid(grid, 1fr, 80px);
+                }
+        }        
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1, h2{
+        font-size: calculate-rem(25px);
+    }
+
+    header {
+        @include flex (flex, column, center, center);
+    }
+
+    main {
+        section#All_files {
+            form {
+                @include grid(grid, 1fr, 20px);
+                width: 100%;
+            }
+        }
+    }
+}
